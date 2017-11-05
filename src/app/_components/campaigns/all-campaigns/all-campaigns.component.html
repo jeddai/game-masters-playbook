@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="card col-4" *ngFor="let campaign of campaigns">
+    <img class="card-img-top" src="" alt="Campaign Image" *ngIf="!!campaign.image">
+    <div class="card-body">
+      <h4 class="card-title">{{campaign.name}}</h4>
+      <p class="card-text">{{campaign.description}}</p>
+      <a class="btn btn-primary" (click)="goToCampaign(campaign)" href="javascript:void(0)">
+        View
+        <i class="fal fa-fw fa-eye"></i>
+      </a>
+      <span class="spacer"></span>
+      <a class="btn btn-danger" (click)="delete(campaign.name)" href="javascript:void(0)">
+        Delete
+        <i class="fal fa-fw fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <div class="card col-4">
+    <div class="card-body">
+      <h4 class="card-title">New Campaign</h4>
+      <p class="card-text">Start here by making a campaign!</p>
+      <a class="btn btn-primary" (click)="addCampaign()" href="javascript:void(0)">
+        New
+        <i class="fal fa-fw fa-plus"></i>
+      </a>
+    </div>
+  </div>
+</div>

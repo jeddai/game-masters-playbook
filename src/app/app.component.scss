@@ -1,0 +1,106 @@
+@import './_themes/light.theme.scss';
+
+.titlebar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  height: 23px;
+  line-height: 23px;
+  vertical-align: middle;
+  text-align: center;
+  color: $text;
+  font-size: .75em;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+}
+
+.fa-icon {
+  margin-top: 2px;
+  width: 19px;
+  height: 18px;
+  float: left;
+  margin-right: 7px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.sidebar {
+  background-color: $sidebar;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.sidebar.col-3,
+.sidebar.col-lg-2 {
+  padding-right: 0px;
+}
+
+.nav-link {
+  color: $text;
+}
+
+.nav-link.active {
+  color: $text-inverted;
+  background-color: $primary;
+}
+
+.nav-title {
+  padding: 5px 0px 0px 10px;
+}
+
+a.tab {
+  color: $text;
+  text-decoration: none;
+  text-align: center;
+  border-style: solid;
+  border-color: $primary;
+  border-width: 0px 0px 2px 0px;
+}
+
+a.tab-icon {
+  float: right;
+  color: $text;
+}
+
+a.tab.active,
+a.tab.active .tab-icon {
+  color: $text-inverted;
+  background-color: $primary;
+}
+
+a.tab.more {
+  width: 50px;
+  min-width: 50px;
+}
+
+.window {
+  padding: 0px 0px 0px 0px;
+  height: 100%;
+}
+
+.window > .row {
+  height: 100%;
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.content {
+  padding-top: 25px;
+}
+
+.content.col-lg-2,
+.content.col-3 {
+  padding-left: 0px;
+}
+
+.content.col-lg-10,
+.content.col-9 {
+  padding-right: 15px;
+}
+
+.content-container {
+  margin: 10px 0px 0px 0px;
+  max-width: 100%;
+}

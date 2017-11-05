@@ -21,7 +21,10 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "./assets/fontawesome-5.0.0-rc3/js/packs/light.min.js",
+        "./assets/fontawesome-5.0.0-rc3/js/fontawesome.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
