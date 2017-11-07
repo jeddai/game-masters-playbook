@@ -43,3 +43,13 @@ body {
   text-align: center;
   vertical-align: middle;
 }
+
+.btn-danger {
+  background-color: $danger !important;
+  border-color: $danger !important;
+  color: $danger_color !important;
+}
+
+.primary {
+  color: $danger !important;
+}

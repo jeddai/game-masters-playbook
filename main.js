@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 require('dotenv').config();
-require('electron-reload')(__dirname);
+const package = process.env.PACKAGE === 'true';
 
 let window = null;
 
@@ -18,15 +18,15 @@ app.on('ready', function () {
     titleBarStyle: 'hidden'
   });
 
-  if (process.env.PACKAGE === 'true'){
+  if(process.env.DEV === 'true') {
+    window.loadURL(process.env.HOST);
+    window.webContents.openDevTools();
+  } else {
     window.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
+      pathname: path.join(__dirname, 'ng-dist/index.html'),
       protocol: 'file:',
       slashes: true
     }));
-  } else {
-    window.loadURL(process.env.HOST);
-    window.webContents.openDevTools();
   }
 
   window.on('closed', function () {
