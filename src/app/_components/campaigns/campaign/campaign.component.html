@@ -4,7 +4,7 @@
     <input class="form-control" [(ngModel)]="campaign.name" *ngIf="editing" minlength="1"/>
   </h1>
   <div class="col-6 btn-spacing">
-    <a class="btn btn-warning float-right" href="javascript:void(0)" (click)="refresh()">
+    <a class="btn btn-warning float-right" href="javascript:void(0)" (click)="refresh()" *ngIf="editing">
       <i class="fal fa-fw fa-undo"></i>
       Refresh
     </a>

@@ -57,17 +57,6 @@ export class NotesComponent implements ControlValueAccessor {
     this.onTouchedCallback = fn;
   }
 
-  getNotesHtml() {
-    let str: string = this.value;
-    let re = new RegExp(/#npc\((.*)\)/g);
-    let macro;
-    while ((macro = re.exec(str)) !== null) {
-      let args = macro[1].split(', ');
-      str = str.replace(macro[0], '');
-    }
-    return str;
-  }
-
   loadNpc() {
     console.log('should load npc');
   }

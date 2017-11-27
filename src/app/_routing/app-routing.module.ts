@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'all-campaigns', component: AllCampaignsComponent, outlet: 'out' },
     { path: 'new-campaign', component: NewCampaignComponent, outlet: 'out' },
     { path: ':id', component: CampaignComponent, outlet: 'out' },
-    { path: 'delete/:name', component: DeleteCampaignComponent, outlet: 'out' }
+    { path: ':id/delete', component: DeleteCampaignComponent, outlet: 'out' }
   ] },
   { path: 'carousing', component: CarousingComponent },
   { path: 'combat', component: CombatComponent },

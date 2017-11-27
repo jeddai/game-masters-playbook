@@ -34,7 +34,7 @@ export class AllCampaignsComponent implements OnInit {
   delete(id) {
     this.state.setTab({
       subtitle: 'Delete',
-      route: [ '/campaigns', { outlets: { out: `delete/${id}` } } ]
+      route: [ '/campaigns', { outlets: { out: `${id}/delete` } } ]
     })
   }
 }

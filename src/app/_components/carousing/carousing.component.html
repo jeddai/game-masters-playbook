@@ -1,3 +1,55 @@
-<p>
-  carousing works!
-</p>
+<h1 class="title">Carousing</h1>
+
+<div class="row">
+  <div class="col-3">
+    <div class="form-group">
+      <label for="result">Specific Result:</label>
+      <input id="result" class="form-control" type="text" placeholder="i.e: 57" [(ngModel)]="specResult"/>
+    </div>
+    <div class="form-group">
+      <label for="limit">Results Limit:</label>
+      <input id="limit" class="form-control" type="number" placeholder="i.e: 5" [(ngModel)]="limitResults"/>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button class="btn btn-primary" (click)="roll()">
+        Go Carousing
+        <i class="fal fa-fw fa-beer"></i>
+      </button>
+      <button class="btn btn-danger" (click)="res = []">
+        Clear
+        <i class="fal fa-fw fa-times"></i>
+      </button>
+    </div>
+    <hr/>
+    <div class="form-group">
+      <label for="participants">Number of Participants:</label>
+      <input id="participants" class="form-control" type="number" placeholder="i.e: 1" [(ngModel)]="numPlayers" (change)="updatePlayers()" min="1" max="4"/>
+    </div>
+    <div class="form-group" *ngIf="numPlayers >= 2">
+      <label for="participant1">Participant 1:</label>
+      <input id="participant1" class="form-control" type="text" placeholder="i.e: Player 1" [(ngModel)]="players[0]"/>
+    </div>
+    <div class="form-group" *ngIf="numPlayers >= 2">
+      <label for="participant2">Participant 2:</label>
+      <input id="participant2" class="form-control" type="text" placeholder="i.e: Player 2" [(ngModel)]="players[1]"/>
+    </div>
+    <div class="form-group" *ngIf="numPlayers >= 3">
+      <label for="participant3">Participant 3:</label>
+      <input id="participant3" class="form-control" type="text" placeholder="i.e: Player 3" [(ngModel)]="players[2]"/>
+    </div>
+    <div class="form-group" *ngIf="numPlayers == 4">
+      <label for="participant4">Participant 4:</label>
+      <input id="participant4" class="form-control" type="text" placeholder="i.e: Player 4" [(ngModel)]="players[3]"/>
+    </div>
+    <small>Thanks to /u/Bellociraptor and /u/pbghin for creating the <a href="https://www.reddit.com/r/DnD/comments/3uunbt/the_bigger_badder_longer_uncut_d100_carousing/">d100 carousing table</a> I used for the most of the one participant results!</small>
+  </div>
+
+  <div class="col-9">
+    <ul class="list-group">
+      <li class="list-group-item justify-content-between" *ngFor="let r of res">
+        {{ r.result }}
+        <span class="badge badge-default badge-pill">{{ r.resultNumber }} of {{ r.maxNumber }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
