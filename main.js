@@ -12,8 +12,8 @@ app.on('ready', function () {
   window = new BrowserWindow({
     width: Math.min(width, 1600), 
     height: Math.min(height, 1000),
-    minWidth: 800,
-    minHeight: 600,
+    minWidth: 1200,
+    minHeight: 900,
     title: 'Game Master\'s Playbook',
     titleBarStyle: 'hidden'
   });

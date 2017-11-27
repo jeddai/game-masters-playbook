@@ -7,7 +7,6 @@
   "main": "main.js",
   "productName": "Game Masters Playbook",
   "scripts": {
-    "postinstall": "install-app-deps",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /Users/Charles/git/game-masters-playbook/ng-dist/ --prod",
@@ -26,17 +25,20 @@
     "mac": {
       "category": "public.app-category.tools",
       "type": "distribution"
-    }, 
+    },
     "dmg": {
-      "contents": [{
-        "x": 110,
-        "y": 150
-      }, {
-        "x": 240,
-        "y": 150,
-        "type": "link",
-        "path": "/Applications"
-      }]
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     },
     "win": {
       "target": "NSIS"
@@ -52,15 +54,19 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.5.1",
     "dotenv": "^4.0.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "ngx-bootstrap": "^1.9.3",
+    "ngx-markdown": "^1.4.0",
     "path": "^0.12.7",
     "popper.js": "^1.12.6",
     "pouchdb": "^6.3.4",
+    "prismjs": "^1.8.4",
+    "q": "^1.5.1",
     "rxjs": "^5.4.2",
     "url": "^0.11.0",
     "zone.js": "^0.8.14"

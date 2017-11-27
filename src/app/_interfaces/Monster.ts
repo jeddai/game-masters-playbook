@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
 
-import { IMonsterAbility, IMonsterAction } from '../_interfaces';
+import { MonsterAbility, MonsterAction } from '../_interfaces';
 import { AbilityScores, Skills } from '../_classes';
 
-export interface IMonster {
+export interface Monster {
   name: string
   size: string
   type: string
@@ -23,9 +23,9 @@ export interface IMonster {
   senses: string
   languages: string
   challenge: string
-  special_abilities: IMonsterAbility[]
-  actions: IMonsterAction[]
-  legendary_actions: IMonsterAbility[]
+  special_abilities: MonsterAbility[]
+  actions: MonsterAction[]
+  legendary_actions: MonsterAbility[]
   initiative: number
   from: string
 }

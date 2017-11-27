@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CampaignService, StateService } from '../../../_services';
+import { StateService } from '../../../_services';
 import * as _ from 'lodash';
+import { Campaign } from '../../../_interfaces';
+import { CampaignService } from './../../../_services/campaign.service';
 
 @Component({
   selector: 'app-all-campaigns',
@@ -9,16 +11,16 @@ import * as _ from 'lodash';
 })
 export class AllCampaignsComponent implements OnInit {
 
-  constructor(private campaignService: CampaignService, private state: StateService) { }
+  constructor(private state: StateService, private campaignService: CampaignService) { }
 
   ngOnInit() {
-    this.campaignService.getCampaigns()
+    this.campaignService.getAll()
     .subscribe(campaigns => {
       this.campaigns = campaigns;
     });
   }
 
-  campaigns: Array<any> = [];
+  campaigns: Array<Campaign> = [];
   newCampaign;
 
   addCampaign(): void {
@@ -26,13 +28,13 @@ export class AllCampaignsComponent implements OnInit {
   }
 
   goToCampaign(campaign) {
-    this.state.setTab({ subtitle: campaign.name, route: [ '/campaigns', { outlets: { out: `${campaign.name}` } } ] });
+    this.state.setTab({ subtitle: campaign._id, route: [ '/campaigns', { outlets: { out: `${campaign._id}` } } ] });
   }
 
-  delete(name) {
+  delete(id) {
     this.state.setTab({
       subtitle: 'Delete',
-      route: [ '/campaigns', { outlets: { out: `delete/${name}` } } ]
+      route: [ '/campaigns', { outlets: { out: `delete/${id}` } } ]
     })
   }
 }

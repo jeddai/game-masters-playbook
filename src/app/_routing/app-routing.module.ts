@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'campaigns', component: CampaignsComponent, children: [
     { path: 'all-campaigns', component: AllCampaignsComponent, outlet: 'out' },
     { path: 'new-campaign', component: NewCampaignComponent, outlet: 'out' },
-    { path: ':name', component: CampaignComponent, outlet: 'out' },
+    { path: ':id', component: CampaignComponent, outlet: 'out' },
     { path: 'delete/:name', component: DeleteCampaignComponent, outlet: 'out' }
   ] },
   { path: 'carousing', component: CarousingComponent },

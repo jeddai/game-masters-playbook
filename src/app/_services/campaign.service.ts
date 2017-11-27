@@ -3,58 +3,87 @@ import PouchDB from 'pouchdb';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import * as _ from 'lodash';
+import { Campaign, CRUD, Session } from '../_interfaces';
+import { SessionService } from '../_services';
 
 @Injectable()
-export class CampaignService {
+export class CampaignService implements CRUD {
 
   constructor() {
     this.db = new PouchDB('campaigns', { adapter: 'websql' });
-    if (!this.db.adapter) {
-      this.db = new PouchDB('campaigns');
-    }
   }
 
   db: PouchDB;
-  campaigns;
+  values: Campaign[];
 
-  getCampaigns(): Observable<any> {
+  getAll(): Observable<Campaign[]> {
     return new Observable(observer => {
       this.db.allDocs({ include_docs: true }, (err, res) => {
         if(err) return observer.next(err);
-        let campaigns = res.rows;
-        _.forEach(campaigns, (c, i) => {
+        let campaigns: Campaign[] = [];
+        _.forEach(res.rows, (c, i) => {
           campaigns[i] = c.doc;
         });
         campaigns = _.sortBy(campaigns, 'name');
         observer.next(campaigns);
-        this.campaigns = campaigns;
+        this.values = campaigns;
       });
     });
   }
 
-  getCampaign(name): Observable<any> {
+  get(id: string): Observable<Campaign> {
     return new Observable(observer => {
-      this.db.get(name).then(doc => {
+      this.db.get(id).then(doc => {
         observer.next(doc);
+      })
+      .catch(err => {
+        console.log(err);
+        observer.next(err);
       });
     });
   }
 
-  addCampaign(campaign) {
-    campaign._id = campaign.name;
-    if(_.filter(this.campaigns, c => {
-      return c._id === campaign._id;
-    }).length > 0)
-      return false;
-    this.db.put(campaign);
-  }
-
-  deleteCampaign(name): Observable<any> {
+  save(campaign: Campaign): Observable<Campaign> {
+    if(!campaign._id) {
+      campaign._id = campaign.name;
+    }
     return new Observable(observer => {
-      this.db.get(name).then(doc => {
-        return observer.next(this.db.remove(doc));
+      this.db.get(campaign.name)
+      .then(doc => {
+        if(doc) {
+          Object.assign(doc, campaign);
+          this.db.put(doc);
+        }
+        this.get(campaign.name)
+        .subscribe(res => {
+          return observer.next(res);
+        });
+      })
+      .catch(err => {
+        this.db.put(campaign);
+        this.get(campaign.name)
+        .subscribe(res => {
+          return observer.next(res);
+        });
       });
     });
   }
 
+  delete(id: string): Observable<Boolean> {
+    return new Observable(observer => {
+      this.db.get(id)
+      .then(doc => {
+        this.db.remove(doc)
+        .then(doc => {
+          return observer.next(true);
+        })
+        .catch(err => {
+          return observer.next(false);
+        });
+      })
+      .catch(err => {
+        return observer.next(false);
+      });
+    });
+  }
 }

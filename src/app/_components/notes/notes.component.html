@@ -1,0 +1,4 @@
+<h1>Notes</h1>
+
+<div markdown id="notes" [data]="getNotesHtml()" *ngIf="!editing"></div>
+<textarea id="editor" [(ngModel)]="value" *ngIf="editing"></textarea>

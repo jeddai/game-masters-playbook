@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StateService } from './../../../_services/state.service';
-import { CampaignService } from './../../../_services/campaign.service';
+import { CampaignService, StateService } from './../../../_services';
+import { Campaign } from '../../../_interfaces';
 
 @Component({
   selector: 'app-delete-campaign',
@@ -12,15 +12,15 @@ export class DeleteCampaignComponent implements OnInit {
 
   name: string;
 
-  constructor(private route: ActivatedRoute, private campaignService: CampaignService, private state: StateService) { }
+  constructor(private route: ActivatedRoute, private state: StateService, private campaignService: CampaignService) { }
 
   ngOnInit() {
     this.name = this.route.snapshot.paramMap.get('name');
   }
 
   delete() {
-    this.campaignService.deleteCampaign(this.name)
-    .subscribe(res => {
+    this.campaignService.delete(this.name)
+    .subscribe(() => {
       this.cancel();
     });
   }

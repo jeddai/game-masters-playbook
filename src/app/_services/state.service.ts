@@ -54,6 +54,7 @@ export class StateService {
     }
     this.selectedTab = index;
     this.navigate();
+    console.log(this.tabs[this.selectedTab]);
   }
 
   activeItem(item) {
@@ -71,7 +72,7 @@ export class StateService {
   setTab(tab, index?) {
     if(index !== undefined)
       this.tabs[index] = Object.assign(this.tabs[index], tab);
-    else
+    else 
       this.tabs[this.selectedTab] = Object.assign(this.tabs[this.selectedTab], tab);
     this.navigate();
   }

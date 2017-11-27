@@ -1,4 +1,4 @@
-export interface IMonsterAction {
+export interface MonsterAction {
   name: string
   desc: string
   attack_bonus: number

@@ -3,7 +3,7 @@ import PouchDB from 'pouchdb';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
-import { Monster } from '../_classes';
+import { Monster } from '../_interfaces';
 
 @Injectable()
 export class MonsterService {
