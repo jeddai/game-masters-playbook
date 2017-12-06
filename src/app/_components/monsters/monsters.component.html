@@ -1,3 +1,61 @@
-<p>
-  monsters works!
-</p>
+<div class="main row">
+  <div class="col-6">
+    <div class="col row justify-content-between">
+      <h3>Monsters</h3>
+      <div style="padding-top:5px;">
+        <button class="btn btn-danger btn-sm" (click)="requestDeleteMonsters()">
+          <i class="fal fa-fw fa-times"></i>
+          Delete Query
+        </button>
+        <button class="btn btn-success btn-sm" (click)="importMonsters()">
+          <i class="fal fa-fw fa-file-alt"></i>
+          Import
+        </button>
+        <button class="btn btn-primary btn-sm" (click)="newMonster()">
+          <i class="fal fa-fw fa-plus"></i>
+          New Monster
+        </button>
+      </div>
+    </div>
+    <div class="col row" *ngIf="deleting">
+      <div class="col-8 offset-2 text-center">
+        <div class="spacer"></div>
+        <p>
+          Are you sure you want to delete all monsters in the current query?
+          Any monster currently visible in the below area will be deleted.
+        </p>
+        <div class="center">
+          <button class="btn btn-danger btn-sm" (click)="deleting = false">
+            <i class="fal fa-fw fa-times"></i>
+            No
+          </button>
+          <button class="btn btn-success btn-sm" (click)="deleteMonsters()">
+            <i class="fal fa-fw fa-check"></i>
+            Yes
+          </button>
+        </div>
+        <div class="spacer"></div>
+      </div>
+    </div>
+    <p *ngIf="monsters?.length === 0">
+      No monsters!
+      Why don't you make one!
+      Click the New Monster button to start making a new monster, or import monsters from a file. 
+    </p>
+    <div class="monster-list list-group" *ngIf="monsters.length !== 0">
+      <div class="list-group-item form-group">
+        <label for="filter">Filter Monsters:</label>
+        <input id="filter" class="form-control" [(ngModel)]="filter" placeholder="Filters on name, type, alignment, size, CR, and from. Use ';' for multiple terms."/>
+      </div>
+      <div class="items">
+        <a class="list-group-item list-group-item-action" href="javascript:void(0)" (click)="selectMonster(monster.name)" *ngFor="let monster of filteredMonsters()">
+          {{ monster.name }}
+        </a>
+      </div>
+      <!-- <small>More info on importing can be found here.</small> -->
+    </div>
+  </div>
+  <div class="outlet col-6">
+    <router-outlet name="out"></router-outlet>
+  </div>
+</div>

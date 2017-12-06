@@ -12,37 +12,28 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private state: StateService, private campaignService: CampaignService) { }
   
-  campaignId: string = null;
+  campaignName: string = null;
   campaign: Campaign = {} as Campaign;
   editing: boolean = false;
   
   ngOnInit() {
-    this.campaignId = this.route.snapshot.paramMap.get('id');
-
-    this.campaignService.get(this.campaignId)
-    .subscribe(campaign => {
-      this.campaign = campaign;
-
-      let state = this.state.getState();
-      Object.assign(this, state || {});
-    });
+    this.campaignName = this.route.snapshot.paramMap.get('name');
+    console.log(this.campaignName);
+    this.campaign = this.campaignService.get(this.campaignName)
+    let state = this.state.getState();
+    Object.assign(this, state || {});
   }
 
   ngOnDestroy() {
-    this.state.setTab({
-      state: {
-        campaignId: this.campaignId,
-        campaign: this.campaign,
-        editing: this.editing
-      }
+    this.state.setState({
+      campaignId: this.campaignName,
+      campaign: this.campaign,
+      editing: this.editing
     }, this.state.previouslySelectedTab);
   }
 
   refresh() {
-    this.campaignService.get(this.campaignId)
-    .subscribe(campaign => {
-      this.campaign = campaign;
-    });
+    this.campaign = this.campaignService.get(this.campaignName);
   }
 
   edit() {
@@ -50,12 +41,10 @@ export class CampaignComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.campaignService.save(this.campaign)
-    .subscribe(res => {
-      this.campaign = res;
-      this.campaignId = res._id;
-      this.editing = false;
-    })
+    let res = this.campaignService.save(this.campaign)
+    this.campaign = res;
+    this.campaignName = res.name;
+    this.editing = false;
   }
 
 }

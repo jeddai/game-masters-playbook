@@ -1,29 +1,43 @@
 import { Injectable } from '@angular/core';
-import PouchDB from 'pouchdb';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
-
-import { Monster } from '../_interfaces';
+import * as _ from 'lodash';
+import { ElectronService } from 'ngx-electron';
+import { Monster, CRUD, Session } from '../_interfaces';
+const type = 'monster';
 
 @Injectable()
-export class MonsterService {
+export class MonsterService implements CRUD {
 
-  constructor() {
-    this.db = new PouchDB('monsters', { adapter: 'websql' });
-    if (!this.db.adapter) {
-      this.db = new PouchDB('monsters');
-    }
+  constructor(private electron: ElectronService) { }
+
+  values: Monster[];
+
+  getAll(): Monster[] {
+    let res = this.electron.ipcRenderer.sendSync('storage/get/all', type);
+    return res;
   }
 
-  db: PouchDB;
-
-  getMonsters(): Observable<Monster> {
-    return new Observable(observer => {
-      this.db.allDocs((err, res) => {
-        if(err) return observer.next(err);
-        observer.next(res);
-      });
-    });
+  get(name: string): Monster {
+    let res = this.electron.ipcRenderer.sendSync('storage/get/one', type, name);
+    return res;
   }
 
+  save(monster: Monster): Monster {
+    let res = this.electron.ipcRenderer.sendSync('storage/put', type, monster);
+    return res;
+  }
+
+  import(monsters: Monster[]): Monster[] {
+    let res = this.electron.ipcRenderer.sendSync('storage/put/many', type, monsters);
+    return res;
+  }
+
+  delete(name: string): Boolean {
+    let res = this.electron.ipcRenderer.sendSync('storage/delete/one', type, name);
+    return res;
+  }
+
+  deleteMany(monsters: Monster[]): Monster[] {
+    let res = this.electron.ipcRenderer.sendSync('storage/delete/many', type, monsters);
+    return res;
+  }
 }

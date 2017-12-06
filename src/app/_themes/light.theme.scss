@@ -8,12 +8,13 @@ $green: #4fbb4b;
 $yellow: #e7dd4a;
 $red: #c04747;
 
-$primary: #b90000;
+$primary: #148dff;
+$primary_hover: #1179d3;
 $primary_color: $white;
 $secondary: #ff6943;
 $secondary_color: $white;
 $background: #fff;
-$sidebar: #eee;
+$sidebar: #f5f5f5;
 
 $success: #5ddb67;
 $info: #66a4fc;
@@ -24,6 +25,68 @@ $danger_color: $white;
 $text: #000;
 $text-inverted: #fff;
 
-.sidebar {
-  background-color: $blue;
+.light.titlebar {
+  background-color: $sidebar;
+  color: $text;
+}
+
+.light {
+  .sidebar {
+    background-color: $sidebar;
+  }
+
+  .nav-link {
+    color: $text;
+  }
+  
+  .nav-link.active {
+    color: $text-inverted;
+    background-color: $primary;
+  }
+
+  a.tab {
+    color: $text;
+    border-color: $primary;
+    background-color: $sidebar;
+  }
+
+  a.tab-icon {
+    color: $text;
+  }
+
+  a.tab.more {
+    background-color: $sidebar;
+  }
+
+  a.tab.active,
+  a.tab.active .tab-icon {
+    color: $text-inverted;
+    background-color: $primary;
+  }
+
+  .btn-primary {
+    background-color: $primary !important;
+    border-color: $primary !important;
+    color: $primary_color !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: $primary_hover !important;
+    border-color: $primary_hover !important;
+  }
+  
+  .btn-secondary {
+    background-color: $secondary !important;
+    border-color: $secondary !important;
+    color: $secondary_color !important;
+  }
+  
+  .primary {
+    color: $primary !important;
+  }
+
+  .secondary {
+    color: $secondary !important;
+  }
+
 }

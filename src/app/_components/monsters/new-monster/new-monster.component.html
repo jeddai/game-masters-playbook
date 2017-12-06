@@ -1,0 +1,172 @@
+<h3>New Monster</h3>
+<form [formGroup]="monsterForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input class="form-control" id="name" type="text" placeholder="Name" formControlName="name" required/>
+  </div>
+
+  <div *ngIf="name.invalid && (name.dirty || name.touched)"
+    class="alert alert-danger">
+    <div *ngIf="name.errors.required">
+      Name is required.
+    </div>
+    <div *ngIf="name.errors.isInvalidName">
+      Monster '{{name.value}}' already exists.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="size">Size</label>
+    <select class="form-control" id="size" formControlName="size" required>
+      <option [ngValue]="null"></option>
+      <option value="tiny">Tiny (d4)</option>
+      <option value="small">Small (d6)</option>
+      <option value="medium">Medium (d8)</option>
+      <option value="large">Large (d10)</option>
+      <option value="huge">Huge (d12)</option>
+      <option value="gargantuan">Gargantuan (d20)</option>
+    </select>
+  </div>
+
+  <div *ngIf="size.invalid && (size.dirty || size.touched)"
+    class="alert alert-danger">
+    <div *ngIf="size.errors.required">
+      Size is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="type">Type</label>
+    <input class="form-control" id="type" type="text" placeholder="Type" formControlName="type"/>
+  </div>
+
+  <div class="form-group">
+    <label for="subtype">Subtype</label>
+    <input class="form-control" id="subtype" type="text" placeholder="Subtype" formControlName="subtype"/>
+  </div>
+
+  <div class="form-group">
+    <label for="alignment">Alignment</label>
+    <input class="form-control" id="alignment" type="text" placeholder="Alignment" formControlName="alignment"/>
+  </div>
+
+  <div class="form-group">
+    <label for="armor_class">Armor Class</label>
+    <input class="form-control" id="armor_class" type="number" placeholder="AC" formControlName="armor_class" required/>
+  </div>
+
+  <div *ngIf="armor_class.invalid && (armor_class.dirty || armor_class.touched)"
+    class="alert alert-danger">
+    <div *ngIf="armor_class.errors.required">
+      Armor Class is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="hit_points">Hit Points</label>
+    <input class="form-control" id="hit_points" type="number" placeholder="HP" formControlName="hit_points" required/>
+    <small class="form-text text-muted">Only enter the number of hit die you want to roll. The average and instance hit points will be calculated for you based off the Con mod.</small>
+  </div>
+
+  <div *ngIf="hit_points.invalid && (hit_points.dirty || hit_points.touched)"
+    class="alert alert-danger">
+    <div *ngIf="hit_points.errors.required">
+      Hit Points is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="speed">Speed</label>
+    <input class="form-control" id="speed" type="text" placeholder="Speed" formControlName="speed"/>
+  </div>
+
+  <div class="form-group" formGroupName="ability_scores">
+    <label>Ability Scores</label>
+    <div class="col-12 row justify-content-between">
+      <span>Str</span>
+      <span>Dex</span>
+      <span>Con</span>
+      <span>Int</span>
+      <span>Wis</span>
+      <span>Cha</span>
+    </div>
+    <div class="input-group">
+      <input class="form-control" type="number" placeholder="STR" formControlName="strength" required/>
+      <input class="form-control" type="number" placeholder="DEX" formControlName="dexterity" required/>
+      <input class="form-control" type="number" placeholder="CON" formControlName="constitution" required/>
+      <input class="form-control" type="number" placeholder="INT" formControlName="intelligence" required/>
+      <input class="form-control" type="number" placeholder="WIS" formControlName="wisdom" required/>
+      <input class="form-control" type="number" placeholder="CHA" formControlName="charisma" required/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="damage_vulnerabilities">Damage Vulnerabilities</label>
+    <input class="form-control" id="damage_vulnerabilities" type="text" placeholder="Damage Vulnerabilities" formControlName="damage_vulnerabilities"/>
+  </div>
+
+  <div class="form-group">
+    <label for="damage_resistances">Damage Resistances</label>
+    <input class="form-control" id="damage_resistances" type="text" placeholder="Damage Resistances" formControlName="damage_resistances"/>
+  </div>
+
+  <div class="form-group">
+    <label for="damage_immunities">Damage Immunities</label>
+    <input class="form-control" id="damage_immunities" type="text" placeholder="Damage Immunities" formControlName="damage_immunities"/>
+  </div>
+
+  <div class="form-group">
+    <label for="condition_immunities">Condition Immunities</label>
+    <input class="form-control" id="condition_immunities" type="text" placeholder="Condition Immunities" formControlName="condition_immunities"/>
+  </div>
+
+  <div class="form-group">
+    <label for="senses">Senses</label>
+    <input class="form-control" id="senses" type="text" placeholder="Senses" formControlName="senses"/>
+  </div>
+
+  <div class="form-group">
+    <label for="languages">Languages</label>
+    <input class="form-control" id="languages" type="text" placeholder="Languages" formControlName="languages"/>
+  </div>
+  
+  <div class="form-group">
+    <label for="challenge">Challenge Rating</label>
+    <select class="form-control" id="challenge" formControlName="challenge" required>
+      <option [ngValue]="null"></option>
+      <option [ngValue]="0">0</option>
+      <option [ngValue]="0.125">1/8</option>
+      <option [ngValue]="0.25">1/4</option>
+      <option [ngValue]="0.5">1/2</option>
+      <option [ngValue]="1">1</option>
+      <option [ngValue]="2">2</option>
+      <option [ngValue]="3">3</option>
+      <option [ngValue]="4">4</option>
+      <option [ngValue]="5">5</option>
+      <option [ngValue]="6">6</option>
+      <option [ngValue]="7">7</option>
+      <option [ngValue]="8">8</option>
+      <option [ngValue]="9">9</option>
+      <option [ngValue]="10">10</option>
+      <option [ngValue]="11">11</option>
+      <option [ngValue]="12">12</option>
+      <option [ngValue]="13">13</option>
+      <option [ngValue]="14">14</option>
+      <option [ngValue]="15">15</option>
+      <option [ngValue]="16">16</option>
+      <option [ngValue]="17">17</option>
+      <option [ngValue]="18">18</option>
+      <option [ngValue]="19">19</option>
+      <option [ngValue]="20">20</option>
+    </select>
+  </div>
+
+  <div *ngIf="challenge.invalid && (challenge.dirty || challenge.touched)"
+    class="alert alert-danger">
+    <div *ngIf="challenge.errors.required">
+      Challenge Rating is required.
+    </div>
+  </div>
+
+  <a class="btn btn-primary" href="javascript:void(0)" (click)="save()" [class.disabled]="monsterForm.invalid">Add Monster</a>
+</form>

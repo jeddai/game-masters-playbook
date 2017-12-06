@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -7,21 +7,28 @@ export class StateService {
 
   constructor(private router: Router) {}
 
-  tabs;
-  selectedTab: number = -1;
-  previouslySelectedTab: number = 0;
+  private tabs;
+  private selectedTab: number = 0;
+  public previouslySelectedTab: number = 0;
 
-  getState() {
-    return this.tabs[this.selectedTab].state;
-  }
-
-  navigate(index?): void {
+  private navigate(index?): void {
     if(index && this.tabs[index].route)
       this.router.navigate(this.tabs[index].route);
     else this.router.navigate(this.tabs[this.selectedTab].route);
   }
 
-  addTab(): void {
+  public getState() {
+    return this.tabs[this.selectedTab].state;
+  }
+
+  public setState(state, index?) {
+    if(index !== undefined)
+      this.tabs[index].state = state;
+    else 
+      this.tabs[this.selectedTab].state = state;
+  }
+
+  public addTab(): void {
     if(this.tabs.length <= 6) {
       this.tabs.push({ 
         name: 'Welcome',
@@ -32,7 +39,7 @@ export class StateService {
     }
   }
 
-  removeTab(index): void {
+  public removeTab(index): void {
     if(this.tabs.length > 1) {
       this.tabs.splice(index, 1);
       if((this.selectedTab === index || this.tabs.length - 2 === index) && this.selectedTab - 1 >= 0)
@@ -40,40 +47,61 @@ export class StateService {
     }
   }
 
-  activeTab(index): boolean {
+  public activeTab(index): boolean {
     return this.selectedTab === index;
   }
 
   public selectTab(index, direction?): void {
     this.previouslySelectedTab = this.selectedTab;
     if(direction) {
+      if(this.tabs.length === 1) return;
       if(direction === 1) this.selectedTab += 1;
       else this.selectedTab -= 1;
       if(this.selectedTab >= this.tabs.length) this.selectedTab = 0;
       else if(this.selectedTab < 0) this.selectedTab = this.tabs.length - 1;
+    } else {
+      this.selectedTab = index;
     }
-    this.selectedTab = index;
     this.navigate();
-    console.log(this.tabs[this.selectedTab]);
   }
 
-  activeItem(item) {
+  public activeItem(item) {
     try {
       let bool = this.tabs[this.selectedTab].name === item.name;
       return bool;
     } catch(e) { return false; }
   }
 
-  selectItem(item) {
+  public selectItem(item) {
     this.tabs[this.selectedTab] = _.cloneDeep(item);
     this.navigate();
   }
 
-  setTab(tab, index?) {
+  public getTab(index?: number): any {
+    if(index !== undefined) return this.tabs[index];
+    return this.tabs[this.selectedTab];
+  }
+
+  public setTab(tab, index?) {
     if(index !== undefined)
-      this.tabs[index] = Object.assign(this.tabs[index], tab);
+      Object.assign(this.tabs[index], tab);
     else 
-      this.tabs[this.selectedTab] = Object.assign(this.tabs[this.selectedTab], tab);
+      Object.assign(this.tabs[this.selectedTab], tab);
     this.navigate();
+  }
+
+  public getTabs(): any[] {
+    return this.tabs;
+  }
+
+  public setTabs(tabs) {
+    this.tabs = tabs;
+  }
+
+  public onRouteChange(callback: Function) {
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd)
+        callback();
+    });
   }
 }

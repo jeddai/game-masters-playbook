@@ -1,89 +1,32 @@
 import { Injectable } from '@angular/core';
-import PouchDB from 'pouchdb';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import * as _ from 'lodash';
+import { ElectronService } from 'ngx-electron';
 import { Campaign, CRUD, Session } from '../_interfaces';
-import { SessionService } from '../_services';
 
 @Injectable()
 export class CampaignService implements CRUD {
 
-  constructor() {
-    this.db = new PouchDB('campaigns', { adapter: 'websql' });
-  }
+  constructor(private electron: ElectronService) { }
 
-  db: PouchDB;
   values: Campaign[];
 
-  getAll(): Observable<Campaign[]> {
-    return new Observable(observer => {
-      this.db.allDocs({ include_docs: true }, (err, res) => {
-        if(err) return observer.next(err);
-        let campaigns: Campaign[] = [];
-        _.forEach(res.rows, (c, i) => {
-          campaigns[i] = c.doc;
-        });
-        campaigns = _.sortBy(campaigns, 'name');
-        observer.next(campaigns);
-        this.values = campaigns;
-      });
-    });
+  getAll(): Campaign[] {
+    let res = this.electron.ipcRenderer.sendSync('storage/get/all', 'campaign');
+    return res;
   }
 
-  get(id: string): Observable<Campaign> {
-    return new Observable(observer => {
-      this.db.get(id).then(doc => {
-        observer.next(doc);
-      })
-      .catch(err => {
-        console.log(err);
-        observer.next(err);
-      });
-    });
+  get(name: string): Campaign {
+    let res = this.electron.ipcRenderer.sendSync('storage/get/one', 'campaign', name);
+    return res;
   }
 
-  save(campaign: Campaign): Observable<Campaign> {
-    if(!campaign._id) {
-      campaign._id = campaign.name;
-    }
-    return new Observable(observer => {
-      this.db.get(campaign.name)
-      .then(doc => {
-        if(doc) {
-          Object.assign(doc, campaign);
-          this.db.put(doc);
-        }
-        this.get(campaign.name)
-        .subscribe(res => {
-          return observer.next(res);
-        });
-      })
-      .catch(err => {
-        this.db.put(campaign);
-        this.get(campaign.name)
-        .subscribe(res => {
-          return observer.next(res);
-        });
-      });
-    });
+  save(campaign: Campaign): Campaign {
+    let res = this.electron.ipcRenderer.sendSync('storage/put', 'campaign', campaign);
+    return res;
   }
 
-  delete(id: string): Observable<Boolean> {
-    return new Observable(observer => {
-      this.db.get(id)
-      .then(doc => {
-        this.db.remove(doc)
-        .then(doc => {
-          return observer.next(true);
-        })
-        .catch(err => {
-          return observer.next(false);
-        });
-      })
-      .catch(err => {
-        return observer.next(false);
-      });
-    });
+  delete(name: string): Boolean {
+    let res = this.electron.ipcRenderer.sendSync('storage/delete/one', 'campaign', name);
+    return res;
   }
 }

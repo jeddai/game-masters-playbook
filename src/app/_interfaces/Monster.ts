@@ -11,7 +11,7 @@ export interface Monster {
   alignment: string
   armor_class: number
   hit_points: number
-  current_hit_points: number
+  current_hit_points?: number
   speed: string
   ability_scores: AbilityScores
   saving_throws: AbilityScores
@@ -22,10 +22,11 @@ export interface Monster {
   condition_immunities: string
   senses: string
   languages: string
-  challenge: string
+  challenge: number
   special_abilities: MonsterAbility[]
   actions: MonsterAction[]
   legendary_actions: MonsterAbility[]
-  initiative: number
+  initiative?: number
   from: string
+  tags: string[]
 }

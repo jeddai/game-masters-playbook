@@ -5,13 +5,13 @@
       <h4 class="card-title">{{campaign.name}}</h4>
       <p class="card-text">{{campaign.description}}</p>
       <a class="btn btn-primary" (click)="goToCampaign(campaign)" href="javascript:void(0)">
-        View
         <i class="fal fa-fw fa-eye"></i>
+        View
       </a>
       <span class="spacer"></span>
-      <a class="btn btn-danger" (click)="delete(campaign._id)" href="javascript:void(0)">
-        Delete
+      <a class="btn btn-danger" (click)="delete(campaign.name)" href="javascript:void(0)">
         <i class="fal fa-fw fa-times"></i>
+        Delete
       </a>
     </div>
   </div>
@@ -20,8 +20,8 @@
       <h4 class="card-title">New Campaign</h4>
       <p class="card-text">Start here by making a campaign!</p>
       <a class="btn btn-primary" (click)="addCampaign()" href="javascript:void(0)">
-        New
         <i class="fal fa-fw fa-plus"></i>
+        New
       </a>
     </div>
   </div>

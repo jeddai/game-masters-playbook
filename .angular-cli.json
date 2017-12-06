@@ -24,7 +24,11 @@
       ],
       "scripts": [
         "./assets/fontawesome-5.0.0-rc3/js/packs/light.min.js",
-        "./assets/fontawesome-5.0.0-rc3/js/fontawesome.min.js"
+        "./assets/fontawesome-5.0.0-rc3/js/fontawesome.min.js",
+        "../node_modules/ace-builds/src-min/ace.js",
+        "../node_modules/ace-builds/src-min/worker-json.js",
+        "../node_modules/ace-builds/src-min/theme-chrome.js",
+        "../node_modules/ace-builds/src-min/mode-json.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

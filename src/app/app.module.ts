@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MarkdownModule } from 'ngx-markdown';
+import { NgxElectronModule } from 'ngx-electron';
+import { TagInputModule } from 'ngx-chips';
+import { AceEditorModule } from 'ng2-ace-editor';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './_routing/app-routing.module';
 
-import { CampaignService } from './_services/campaign.service';
-import { MonsterService } from './_services/monster.service';
-import { StateService } from './_services/state.service';
-import { NpcService } from './_services/npc.service';
-import { SessionService } from './_services/session.service';
+import { CampaignService, MonsterService, NpcService, SessionService, SettingsService, StateService } from './_services';
 import { WelcomeComponent } from './_components/welcome/welcome.component';
 import { CampaignsComponent } from './_components/campaigns/campaigns.component';
 import { CarousingComponent } from './_components/carousing/carousing.component';
@@ -27,6 +27,11 @@ import { DeleteCampaignComponent } from './_components/campaigns/delete-campaign
 import { NpcComponent } from './_components/npc/npc.component';
 import { SessionComponent } from './_components/sessions/session/session.component';
 import { NotesComponent } from './_components/notes/notes.component';
+import { CreditsComponent } from './_components/credits/credits.component';
+import { NewMonsterComponent } from './_components/monsters/new-monster/new-monster.component';
+import { DeleteMonsterComponent } from './_components/monsters/delete-monster/delete-monster.component';
+import { MonsterComponent } from './_components/monsters/monster/monster.component';
+import { ImportMonstersComponent } from './_components/monsters/import-monsters/import-monsters.component';
 
 @NgModule({
   declarations: [
@@ -45,22 +50,32 @@ import { NotesComponent } from './_components/notes/notes.component';
     DeleteCampaignComponent,
     NpcComponent,
     SessionComponent,
-    NotesComponent
+    NotesComponent,
+    CreditsComponent,
+    NewMonsterComponent,
+    DeleteMonsterComponent,
+    MonsterComponent,
+    ImportMonstersComponent
   ],
   imports: [
+    AceEditorModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     MarkdownModule.forRoot(),
     NgbModule.forRoot(),
-    ReactiveFormsModule
+    NgxElectronModule,
+    ReactiveFormsModule,
+    TagInputModule
   ],
   providers: [
     CampaignService,
     MonsterService,
     NpcService,
     SessionService,
-    StateService
+    StateService,
+    SettingsService
   ],
   bootstrap: [ AppComponent ]
 })

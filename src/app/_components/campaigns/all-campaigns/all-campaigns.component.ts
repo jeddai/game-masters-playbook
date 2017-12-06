@@ -14,10 +14,7 @@ export class AllCampaignsComponent implements OnInit {
   constructor(private state: StateService, private campaignService: CampaignService) { }
 
   ngOnInit() {
-    this.campaignService.getAll()
-    .subscribe(campaigns => {
-      this.campaigns = campaigns;
-    });
+    this.campaigns = this.campaignService.getAll();
   }
 
   campaigns: Array<Campaign> = [];
@@ -28,13 +25,13 @@ export class AllCampaignsComponent implements OnInit {
   }
 
   goToCampaign(campaign) {
-    this.state.setTab({ subtitle: campaign._id, route: [ '/campaigns', { outlets: { out: `${campaign._id}` } } ] });
+    this.state.setTab({ subtitle: campaign.name, route: [ '/campaigns', { outlets: { out: `${campaign.name}` } } ] });
   }
 
-  delete(id) {
+  delete(name) {
     this.state.setTab({
-      subtitle: 'Delete',
-      route: [ '/campaigns', { outlets: { out: `${id}/delete` } } ]
+      route: [ '/campaigns', { outlets: { out: `${name}/delete` } } ],
+      subtitle: `Delete ${name}`
     })
   }
 }

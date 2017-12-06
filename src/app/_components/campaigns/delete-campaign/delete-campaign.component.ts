@@ -10,19 +10,17 @@ import { Campaign } from '../../../_interfaces';
 })
 export class DeleteCampaignComponent implements OnInit {
 
-  id: string;
+  name: string;
 
   constructor(private route: ActivatedRoute, private state: StateService, private campaignService: CampaignService) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.name = this.route.snapshot.paramMap.get('name');
   }
 
   delete() {
-    this.campaignService.delete(this.id)
-    .subscribe(() => {
-      this.cancel();
-    });
+    this.campaignService.delete(this.name);
+    this.cancel();
   }
 
   cancel() {

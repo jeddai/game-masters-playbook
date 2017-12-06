@@ -47,9 +47,7 @@ export class AbilityScores {
 
   public static ParseScores(obj: AbilityScores): AbilityScores {
     var ascores: AbilityScores = new AbilityScores();
-    for(var key in obj) {
-      ascores[key] = obj[key];
-    }
+    Object.assign(ascores, obj);
     return ascores;
   }
 

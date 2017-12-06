@@ -1,13 +1,13 @@
 <div class="container">
   <div class="center">
-    <p>Are you sure you want to delete {{id}}?</p>
-    <a class="btn btn-primary" (click)="cancel()" href="javascript:void(0)">
-      No
+    <p>Are you sure you want to delete {{name}}?</p>
+    <button class="btn btn-danger" (click)="cancel()">
       <i class="fal fa-fw fa-times"></i>
-    </a>
-    <a class="btn btn-danger" (click)="delete()" href="javascript:void(0)">
-      Yes
+      No
+    </button>
+    <button class="btn btn-success" (click)="delete()">
       <i class="fal fa-fw fa-check"></i>
-    </a>
+      Yes
+    </button>
   </div>
 </div>

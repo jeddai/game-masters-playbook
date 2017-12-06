@@ -2,9 +2,8 @@ import { Observable } from 'rxjs/Observable';
 import PouchDB from 'pouchdb';
 
 export interface CRUD {
-  db: PouchDB
-  getAll(): Observable<any>
-  get(name: string): Observable<any>
+  getAll(): any
+  get(name: string): any
   save(obj: any): void
-  delete(name: string): Observable<any>
+  delete(name: string): any
 }

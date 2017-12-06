@@ -1,0 +1,101 @@
+<div class="col row justify-content-between">
+  <div>
+    <h3>{{ monster?.name }}</h3>
+    <em>
+      <span>{{ _.capitalize(monster.type) }}, </span>
+      <span *ngIf="monster.subtype">{{ _.capitalize(monster.subtype) }}, </span>
+      <span>{{ _.capitalize(monster.alignment) }}</span>
+    </em>
+  </div>
+  <div>
+    <button class="btn btn-primary btn-sm" type="button" (click)="edit()">
+      <i class="fal fa-fw fa-pen"></i>
+      Edit
+    </button>
+    <button class="btn btn-danger btn-sm" type="button" (click)="delete()">
+      <i class="fal fa-fw fa-times"></i>
+      Delete
+    </button>
+  </div>
+</div>
+
+<hr/>
+
+<div class="col row text-center">
+  <div class="col" *ngFor="let absc of abilityScores">
+    <small>
+      <strong>{{ absc.label }}</strong>
+    </small>
+    <br/>
+    <span>{{ getAbilityScoreModifier(absc.name).string }}</span>
+  </div>
+</div>
+
+<hr/>
+
+<div class="col row text-center">
+  <div class="col">
+    <small>
+      <strong>Challenge Rating</strong>
+    </small>
+    <br/>
+    <span>{{ getChallengeRating() }}</span>
+  </div>
+  <div class="col">
+    <small>
+      <strong>Size</strong>
+    </small>
+    <br/>
+    <small>{{ _.capitalize(monster.size) }}</small>
+  </div>
+  <div class="col">
+    <small>
+      <strong>Armor Class</strong>
+    </small>
+    <br/>
+    <span>{{ monster.armor_class }}</span>
+  </div>
+  <div class="col">
+    <small>
+      <strong>Hit Points</strong>
+    </small>
+    <br/>
+    <small>{{ getHP() }}</small>
+  </div>
+  <div class="col">
+    <small>
+      <strong>Speed</strong>
+    </small>
+    <br/>
+    <small>{{ monster.speed }}</small>
+  </div>
+</div>
+
+<hr/>
+
+<div class="col row">
+  <div class="col-4" *ngFor="let stat of stats()">
+    <small>
+      <strong>{{ stat.name }}</strong>
+    </small>
+    <br>
+    <small>{{ stat.value }}</small>
+  </div>
+</div>
+
+<hr/>
+
+<div *ngFor="let abilities of monsterAbilities">
+  <div class="col row">
+    <h5>{{ abilities.name }}</h5>
+    <div class="row">
+      <div *ngFor="let ability of abilities.value">
+        <em class="col-4">
+          <strong>{{ ability.name }}</strong>
+        </em>
+        <span class="col-8">{{ ability.description }}</span>
+      </div>
+    </div>
+  </div>
+  <hr/>
+</div>

@@ -1,0 +1,9 @@
+<h3>Import</h3>
+<p>Enter in JSON format any number of monsters you wish to import.</p>
+<ace-editor id="editor" #editor class="col" [(text)]="monsters"
+[mode]="'json'" [theme]="'chrome'"></ace-editor>
+<br/>
+<div class="col row justify-content-between">
+  <button class="btn btn-primary btn-sm" (click)="save()">Import</button>
+  <button class="btn btn-primary btn-sm" (click)="addMonsterJSON()">Add Additional Monster</button>
+</div>

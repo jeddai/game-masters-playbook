@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CarousingRolls } from './../../_classes';
 import * as _ from 'lodash';
+
+import { StateService } from '../../_services';
 
 @Component({
   selector: 'app-carousing',
@@ -9,9 +11,21 @@ import * as _ from 'lodash';
 })
 export class CarousingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private state: StateService) { }
 
   ngOnInit() {
+    let state = this.state.getState();
+    if(state) Object.assign(this, state);
+  }
+
+  ngOnDestroy() {
+    this.state.setState({
+      numPlayers: this.numPlayers,
+      players: this.players,
+      res: this.res,
+      specResult: this.specResult,
+      limitResults: this.limitResults
+    }, this.state.previouslySelectedTab);
   }
 
   public numPlayers = 1;

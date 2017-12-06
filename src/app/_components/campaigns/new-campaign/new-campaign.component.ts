@@ -40,30 +40,27 @@ export class NewCampaignComponent implements OnInit, OnDestroy {
     let state = this.state.getState() as Campaign;
     this.campaignForm.patchValue(!!state ? state : {} as Campaign);
 
-    this.campaignService.getAll()
-    .subscribe(campaigns => {
-      this.campaigns = campaigns;
-    });
+    this.campaigns = this.campaignService.getAll();
   }
 
   ngOnDestroy() {
-    this.campaign = this.campaignForm.value;
-    if(this.campaign.name)
-      this.state.setTab({
-        state: _.cloneDeep(this.campaign)
-      }, this.state.previouslySelectedTab);
+    if(this.campaignForm) {
+      this.campaign = this.campaignForm.value;
+      if(this.campaign.name)
+        this.state.setState(_.cloneDeep(this.campaign), this.state.previouslySelectedTab);
+    }
   }
 
   submit() {
     if(!this.campaignForm.invalid) {
       this.campaign = _.cloneDeep(this.campaignForm.value);
       this.campaignService.save(this.campaign)
-      .subscribe(() => {
+      // .subscribe(() => {
         this.state.setTab({
           route: [ '/campaigns', { outlets: { out: 'all-campaigns' } } ],
           subtitle: ''
         });
-      });
+      // });
     } 
   }
 

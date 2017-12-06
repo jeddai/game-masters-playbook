@@ -1,0 +1,121 @@
+$black: #000;
+$gray: #888;
+$dark-gray: #444;
+$light-gray: #aaa;
+$white: #fff;
+$blue: #4e96da;
+$green: #4fbb4b;
+$yellow: #e7dd4a;
+$red: #c04747;
+
+$primary: #9d73ff;
+$primary_hover: #9060ff;
+$primary_color: $white;
+$secondary: #ff6943;
+$secondary_color: $white;
+$background: #403d50;
+$sidebar: #58546d;
+
+$success: #5ddb67;
+$info: #66a4fc;
+$warning: #fcff4f;
+$danger: #e71f1f;
+$danger_color: $white;
+
+$text: #ebebeb;
+$text-inverted: #000000;
+
+.dark.titlebar {
+  background-color: $sidebar;
+  color: $text;
+}
+
+.dark.container-fluid {
+  background-color: $background;
+  color: $text;
+}
+
+.dark {
+
+  .sidebar {
+    background-color: $sidebar;
+  }
+
+  input,
+  textarea,
+  #editor,
+  input:focus,
+  textarea:focus,
+  #editor:focus,
+  .card,
+  .list-group-item {
+    background-color: $sidebar !important;
+    color: $text;
+  }
+
+  .nav-link {
+    color: $text;
+  }
+  
+  .nav-link.active {
+    color: $text-inverted;
+    background-color: $primary;
+  }
+
+  a {
+    color: $primary;
+  }
+
+  a.tab {
+    color: $text;
+    border-color: $primary;
+    background-color: $sidebar;
+  }
+
+  a.tab-icon {
+    color: $text;
+  }
+
+  a.tab.more {
+    background-color: $sidebar;
+  }
+
+  a.tab.active,
+  a.tab.active .tab-icon {
+    color: $text-inverted;
+    background-color: $primary;
+  }
+
+  .btn-primary {
+    background-color: $primary !important;
+    border-color: $primary !important;
+    color: $primary_color !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: $primary_hover !important;
+    border-color: $primary_hover !important;
+  }
+  
+  .btn-success,
+  .btn-info,
+  .btn-warning,
+  .btn-danger {
+    color: $white !important;
+  }
+  
+  .btn-secondary {
+    background-color: $secondary !important;
+    border-color: $secondary !important;
+    color: $secondary_color !important;
+  }
+
+  .primary {
+    color: $primary !important;
+  }
+  
+  .secondary {
+    color: $secondary;
+  }
+
+}

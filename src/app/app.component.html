@@ -1,13 +1,13 @@
-<div class="titlebar col-12">
+<div class="titlebar col-12 justify-content-between" [ngClass]="theme">
   <span>Game Master's Playbook</span>
 </div>
 
-<div class="window container-fluid">
+<div class="window container-fluid" [ngClass]="theme">
   <div class="row">
     <div class="sidebar content col-lg-2 col-3">
       <nav class="nav flex-column">
-        <h5 class="nav-title">Game Master's Playbook</h5>
-        <a class="nav-link" [class.active]="state.activeItem(item)" (click)="state.selectItem(item)" *ngFor="let item of playbookItems; let i = index;" [routerLink]="item.route">
+        <h5 class="nav-title">Tools</h5>
+        <a class="nav-link" [class.active]="state.activeItem(item)" (click)="state.selectItem(item)" *ngFor="let item of playbookItems; let i = index;" [routerLink]="item.route" tabindex="-1">
           <i class="fa-icon fal fa-fw" [ngClass]="item.icon"></i>
           {{item.name}}
         </a>
@@ -15,7 +15,7 @@
       <nav class="nav flex-column">
         <h5 class="nav-title">Settings</h5>
         <div *ngFor="let item of settingsItems; let i = index;">
-          <a class="nav-link" [class.active]="state.activeItem(item)" (click)="state.selectItem(item)" *ngIf="item.if()" [routerLink]="item.route">
+          <a class="nav-link" [class.active]="state.activeItem(item)" (click)="state.selectItem(item)" *ngIf="item.if()" [routerLink]="item.route" tabindex="-1">
             <i class="fa-icon fal fa-fw" [ngClass]="item.icon"></i>
             {{item.name}}
           </a>
@@ -23,17 +23,17 @@
       </nav>
     </div>
 
-    <div class="content col-lg-10 col-9">
+    <div class="content col" [ngClass]="theme">
       <div class="row">
-        <a class="tab col" [class.active]="state.activeTab(i)" (click)="state.selectTab(i)" *ngFor="let tab of state.tabs; let i = index" [routerLink]="tab.route">
+        <a class="tab col" [class.active]="state.activeTab(i)" (click)="state.selectTab(i)" *ngFor="let tab of state.getTabs(); let i = index" [routerLink]="tab.route" tabindex="-1">
           <span>
             <i class="fa-icon fal fa-fw" [ngClass]="tab.icon"></i>
             {{tab.name}}
             <span *ngIf="!!tab.subtitle"> –– {{tab.subtitle}}</span>
           </span>
-          <a class="tab-icon" (click)="state.removeTab(i)" href="javascript:void(0)"><i class="fa-icon fal fa-fw fa-times-square float-xs-left"></i></a>
+          <a class="tab-icon" (click)="state.removeTab(i)" href="javascript:void(0)" tabindex="-1"><i class="fa-icon fal fa-fw fa-times-square float-xs-left"></i></a>
         </a>
-        <a class="tab more" (click)="state.addTab()" href="javascript:void(0)">
+        <a class="tab more" (click)="state.addTab()" href="javascript:void(0)" tabindex="-1">
           <i class="fa-icon fal fa-fw fa-plus"></i>
         </a>
       </div>

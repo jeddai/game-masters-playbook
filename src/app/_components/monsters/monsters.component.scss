@@ -1,0 +1,21 @@
+.main.row {
+  max-height: 92vh;
+
+  .col-6 {
+    max-height: 100%;
+  }
+
+  .items {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+}
+
+.outlet {
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.spacer {
+  padding-top: 15px;
+}

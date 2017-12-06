@@ -40,7 +40,6 @@ export class SessionService implements CRUD {
   }
 
   save(session: Session) {
-    session._id = session.name;
     return new Observable(observer => {
       this.db.get(session.name)
       .then(doc => {
